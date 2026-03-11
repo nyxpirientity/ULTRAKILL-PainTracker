@@ -11,6 +11,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
         * either way it'll probably eventually be modified to suit balance instead unless it ends up actually being balanced via my best understanding of the lore being applied
         */
         public EnemyComponents Enemy { get; private set; } = null;
+        public static int MonoRegistrarIdx { get; private set; }
 
         public float ActivePhysicalPain = 0.0f;
         public float PhysicalSensitivity = 1.0f;
@@ -101,7 +102,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
             ListeningForDeath = false;
         }
 
-        private void PostPlayerHurt(NewMovement nm, int processedDamage, bool invincible, float scoreLossMultiplier, bool explosion, bool instablack, float hardDamageMultiplier, bool ignoreInvincibility)
+        private void PostPlayerHurt(EventMethodCancelInfo cancelInfo, PlayerComponents player, int unprocessedDamage, int processedDamage, bool invincible, float scoreLossMultiplier, bool explosion, bool instablack, float hardDamageMultiplier, bool ignoreInvincibility)
         {
             ActiveMentalPain = Math.Max(ActiveHardMentalPain, ActiveMentalPain - (float)processedDamage * 0.01f);
         }
@@ -277,6 +278,11 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
             PhysicalSensitivity = Mathf.Max(0.2f, PhysicalSensitivity - (pain * 0.5f));
 
             ActivePhysicalPain += pain;
+        }
+
+        internal static void Initialize()
+        {
+            MonoRegistrarIdx = EnemyComponents.MonoRegistrar.Register<EnemyPain>();
         }
     }
 }

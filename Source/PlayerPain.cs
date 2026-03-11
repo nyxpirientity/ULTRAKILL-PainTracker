@@ -5,7 +5,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
 {
     public class PlayerPain : MonoBehaviour
     {
-        NewMovement Player = null;
+        public static int MonoRegistrarIdx { get; private set; }
 
         protected void Start()
         {
@@ -28,9 +28,16 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
             PlayerEvents.PostHurt -= PostPlayerHurt;
         }
 
-        private void PostPlayerHurt(NewMovement nm, int processedDamage, bool invincible, float scoreLossMultiplier, bool explosion, bool instablack, float hardDamageMultiplier, bool ignoreInvincibility)
+        NewMovement Player = null;
+
+        private void PostPlayerHurt(EventMethodCancelInfo cancelInfo, PlayerComponents player, int unprocessedDamage, int processedDamage, bool invincible, float scoreLossMultiplier, bool explosion, bool instablack, float hardDamageMultiplier, bool ignoreInvincibility)
         {
             Heck.Itself.GetPainStore().AddPain((float)processedDamage * 0.01f);
+        }
+
+        internal static void Initialize()
+        {
+            MonoRegistrarIdx = PlayerComponents.MonoRegistrar.Register<PlayerPain>();
         }
     }
 }
