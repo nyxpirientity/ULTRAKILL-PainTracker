@@ -12,7 +12,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
 
         [SerializeField] private bool Configured = false;
 
-        public bool Enabled { get => Cheats.IsCheatEnabled(Cheats.AggressiveAgony); }
+        public bool Enabled { get => Heck.Itself.GetPainStore().PainMeterRequests >= 1; }
         public bool Disabled { get => !Enabled; }
         [SerializeField] public Slider Meter { get; private set; }
         public GameObject Fill { get; private set; }
