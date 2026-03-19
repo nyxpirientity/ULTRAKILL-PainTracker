@@ -4,7 +4,7 @@ using Nyxpiri.ULTRAKILL.NyxLib;
 
 namespace Nyxpiri.ULTRAKILL.PainTracker
 {
-    [BepInPlugin("com.nyxpiri.bepinex.plugins.ultrakill.pain-tracker", "Pain Tracker", "0.0.0.1")]
+    [BepInPlugin("nyxpiri.ultrakill.pain-tracker", "Pain Tracker", "0.0.0.1")]
     [BepInProcess("ULTRAKILL.exe")]
     public class PainTracker: BaseUnityPlugin
     {
