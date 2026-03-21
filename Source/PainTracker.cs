@@ -11,7 +11,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
         protected void Awake()
         {
             Log.Initialize(Logger);
-            
+            Assets.Initialize();
             EnemyPain.Initialize();
             PlayerPain.Initialize();
         }
