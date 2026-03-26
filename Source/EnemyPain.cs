@@ -266,7 +266,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
             Heck.Itself.GetPainStore().AddPain((ActivePhysicalPain + ActiveMentalPain) * painScalar * Time.fixedDeltaTime);
         }
 
-        private void OnPreHurt(GameObject target, Vector3 force, Vector3? hitPoint, float multiplier, bool tryForExplode, float critMultiplier, GameObject sourceWeapon, bool ignoreTotalDamageTakenMultiplier, bool fromExplosion)
+        private void OnPreHurt(EventMethodCanceler canceler, GameObject target, Vector3 force, Vector3? hitPoint, float multiplier, bool tryForExplode, float critMultiplier, GameObject sourceWeapon, bool ignoreTotalDamageTakenMultiplier, bool fromExplosion)
         {
             if (!ListeningForDeath)
             {
