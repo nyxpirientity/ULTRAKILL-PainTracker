@@ -18,7 +18,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
             ScenesEvents.OnSceneWasLoaded += OnSceneWasLoaded;
         }
 
-        private static void OnSceneWasLoaded(Scene scene, string sceneName)
+        private static void OnSceneWasLoaded(Scene scene, string levelName, string unitySceneName)
         {
             if (HeatResistancePrefabWithoutHeatResistance == null)
             {
