@@ -37,12 +37,12 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
             Enemy.PreDeath += OnPreDeath;
         }
 
-        private void PreEnrage()
+        private void PreEnrage(EventMethodCanceler canceler)
         {
             ActiveMentalPain += 0.75f;
         }
 
-        private void OnPreDeath(bool instakill)
+        private void OnPreDeath(EventMethodCanceler canceler, bool instakill)
         {
             if (Enemy.Eid.enemyType == EnemyType.Mindflayer)
             {
@@ -68,7 +68,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
         private EnemySpeciesType SpeciesType;
         private EnemySpeciesRank SpeciesRank;
 
-        private void PostDeath(bool instakilled)
+        private void PostDeath(EventMethodCancelInfo cancelInfo, bool instakilled)
         {
             TryStopListeningForDeath();
         }
