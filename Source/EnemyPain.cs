@@ -26,6 +26,11 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
             _painPerceptorRegistrationTracker = new RegistrationTracker(
                 () =>
                 {
+                    if (Enemy.Eid.puppet || Enemy.Eid.Dead)
+                    {
+                        return false;  
+                    }
+
                     Heck.Itself.GetPainStore().RegisterPainPerceptor();
                     return true;
                 },
