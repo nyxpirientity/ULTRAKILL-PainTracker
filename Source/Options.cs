@@ -32,8 +32,8 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
             ResetPainOnCybergrindWaveChange = _config.Bind("Resetting", "ResetPainOnCybergrindWaveChange", true, "");
             ResetPainOnCheckpointRestart = _config.Bind("Resetting", "ResetPainOnCheckpointRestart", true, "");
 
-            PhysicalPainMultiplier = _config.Bind("Balance", "PhysicalPainMultiplier", 2.5f);
-            MentalPainMultiplier = _config.Bind("Balance", "MentalPainMultiplier", 2.5f);
+            PhysicalPainMultiplier = _config.Bind("Balance", "PhysicalPainMultiplier", 1.5f);
+            MentalPainMultiplier = _config.Bind("Balance", "MentalPainMultiplier", 1.5f);
         }
 
         private static void Reload()
