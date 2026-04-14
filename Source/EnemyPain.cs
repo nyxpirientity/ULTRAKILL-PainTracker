@@ -121,6 +121,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
         private void PostPlayerHurt(EventMethodCancelInfo cancelInfo, PlayerComponents player, int unprocessedDamage, int processedDamage, bool invincible, float scoreLossMultiplier, bool explosion, bool instablack, float hardDamageMultiplier, bool ignoreInvincibility)
         {
             ActiveMentalPain = Math.Max(ActiveHardMentalPain, ActiveMentalPain - (float)processedDamage * 0.01f);
+            Heck.Itself.GetPainStore().AddPain(-processedDamage * 0.04f);
         }
 
         private void OnAnyEnemyDeath(EnemyComponents otherEnemy)
