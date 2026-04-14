@@ -126,7 +126,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
         private void PostPlayerHurt(EventMethodCancelInfo cancelInfo, PlayerComponents player, int unprocessedDamage, int processedDamage, bool invincible, float scoreLossMultiplier, bool explosion, bool instablack, float hardDamageMultiplier, bool ignoreInvincibility)
         {
             ActiveMentalPain = Math.Max(ActiveHardMentalPain, ActiveMentalPain - (float)processedDamage * 0.01f);
-            Heck.Itself.GetPainStore().AddPain(-processedDamage * 0.04f);
+            Heck.Itself.GetPainStore().AddPain(-processedDamage * 0.005f);
         }
 
         private void OnAnyEnemyDeath(EnemyComponents otherEnemy)
@@ -240,7 +240,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
                 }
             }
 
-            var mentalPain = (concern + compassion) * MentalSensitivity * 4.0f;
+            var mentalPain = (concern + compassion) * MentalSensitivity * Options.MentalPainMultiplier.Value;
             MentalSensitivity = Mathf.Max(0.2f, MentalSensitivity - mentalPain);
             ActiveMentalPain += mentalPain;
             ActiveHardMentalPain += mentalPain * 0.2f;
@@ -304,7 +304,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
 
             PhysicalSensitivity = Mathf.Max(0.2f, PhysicalSensitivity - (pain * 0.5f));
 
-            ActivePhysicalPain += pain * 4.0f;
+            ActivePhysicalPain += pain * Options.PhysicalPainMultiplier.Value;
         }
 
         internal static void Initialize()

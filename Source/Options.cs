@@ -8,6 +8,9 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
 {
     public static class Options
     {
+        public static ConfigEntry<float> PhysicalPainMultiplier = null;
+        public static ConfigEntry<float> MentalPainMultiplier = null;
+
         public static ConfigEntry<bool> AutoRequestPainMeter = null;
         public static ConfigEntry<bool> ShowPainMeterEvenIfNoPain = null;
         public static ConfigEntry<bool> AlwaysHidePainMeter = null;
@@ -28,6 +31,9 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
             AlwaysHidePainMeter = _config.Bind("Meter", "AlwaysHidePainMeter", false, "Hides pain meter even when mods request it to be shown");
             ResetPainOnCybergrindWaveChange = _config.Bind("Resetting", "ResetPainOnCybergrindWaveChange", true, "");
             ResetPainOnCheckpointRestart = _config.Bind("Resetting", "ResetPainOnCheckpointRestart", true, "");
+
+            PhysicalPainMultiplier = _config.Bind("Balance", "PhysicalPainMultiplier", 2.5f);
+            MentalPainMultiplier = _config.Bind("Balance", "MentalPainMultiplier", 2.5f);
         }
 
         private static void Reload()
