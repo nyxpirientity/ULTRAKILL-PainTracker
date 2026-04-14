@@ -262,9 +262,9 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
                 return;
             }
             
-            ActivePhysicalPain = Mathf.Min(ActivePhysicalPain, 4.0f);
-            ActiveMentalPain = Mathf.Min(ActiveMentalPain, 4.0f);
-            ActiveHardMentalPain = Mathf.Min(ActiveHardMentalPain, 4.0f);
+            ActivePhysicalPain = Mathf.Min(ActivePhysicalPain, Options.PhysicalPainPerEnemyCap.Value);
+            ActiveMentalPain = Mathf.Min(ActiveMentalPain, Options.MentalPainPerEnemyCap.Value);
+            ActiveHardMentalPain = Mathf.Min(ActiveHardMentalPain, Options.MentalPainPerEnemyCap.Value);
 
             float painScalar = 1.0f;
 

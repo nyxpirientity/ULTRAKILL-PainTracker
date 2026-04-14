@@ -9,7 +9,9 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
     public static class Options
     {
         public static ConfigEntry<float> PhysicalPainMultiplier = null;
+        public static ConfigEntry<float> PhysicalPainPerEnemyCap = null;
         public static ConfigEntry<float> MentalPainMultiplier = null;
+        public static ConfigEntry<float> MentalPainPerEnemyCap = null;
 
         public static ConfigEntry<bool> AutoRequestPainMeter = null;
         public static ConfigEntry<bool> ShowPainMeterEvenIfNoPain = null;
@@ -32,8 +34,10 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
             ResetPainOnCybergrindWaveChange = _config.Bind("Resetting", "ResetPainOnCybergrindWaveChange", true, "");
             ResetPainOnCheckpointRestart = _config.Bind("Resetting", "ResetPainOnCheckpointRestart", true, "");
 
-            PhysicalPainMultiplier = _config.Bind("Balance", "PhysicalPainMultiplier", 1.5f);
-            MentalPainMultiplier = _config.Bind("Balance", "MentalPainMultiplier", 1.5f);
+            PhysicalPainMultiplier = _config.Bind("Balance", "PhysicalPainMultiplier", 2.0f);
+            MentalPainMultiplier = _config.Bind("Balance", "MentalPainMultiplier", 1.0f);
+            PhysicalPainPerEnemyCap = _config.Bind($"Balance", "PhysicalPainPerEnemyCap", 10.0f);
+            MentalPainPerEnemyCap = _config.Bind($"Balance", "MentalPainPerEnemyCap", 10.0f);
         }
 
         private static void Reload()
