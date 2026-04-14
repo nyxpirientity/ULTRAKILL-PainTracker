@@ -44,12 +44,13 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
                 GameObject.Destroy(maybeHeatRes);
             }
 
-            var audioSources = GetComponents<AudioSource>();
+            var audioSources = GetComponentsInChildren<AudioSource>();
 
             foreach (var audio in audioSources)
             {
                 audio.Stop();
                 audio.enabled = false;
+                audio.volume = 0.0f;
             }
 
             Meter = transform.Find("Meter").gameObject.GetComponent<Slider>();
@@ -64,8 +65,8 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
             RectTransform.anchorMin = new Vector2(1.0f, 0.0f);
             RectTransform.anchorMax = new Vector2(1.0f, 0.0f);
             RectTransform.rotation = Quaternion.Euler(0.0f, 0.0f, -90.0f);
-            RectTransform.anchoredPosition = new Vector2(-25.0f, 225.0f);
-            RectTransform.sizeDelta = RectTransform.sizeDelta - new Vector2(100.0f, 40.0f);
+            RectTransform.anchoredPosition = new Vector2(-25.0f, 200.0f);
+            RectTransform.sizeDelta = RectTransform.sizeDelta - new Vector2(120.0f, 40.0f);
         }
 
         protected void Start()

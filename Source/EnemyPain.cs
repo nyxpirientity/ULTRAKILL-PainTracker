@@ -23,6 +23,18 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
         protected void Awake()
         {
             Enemy = GetComponent<EnemyComponents>();
+            _painPerceptorRegistrationTracker = new RegistrationTracker(
+                () =>
+                {
+                    Heck.Itself.GetPainStore().RegisterPainPerceptor();
+                    return true;
+                },
+                () =>
+                {
+                    Heck.Itself.GetPainStore().UnregisterPainPerceptor();
+                    return true;
+                }
+            );
         }
 
         protected void Start()
@@ -52,16 +64,20 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
             {
                 Heck.Itself.GetPainStore().AddPain(3.5f);
             }
+
+            _painPerceptorRegistrationTracker.Unregister();
         }
 
         protected void OnEnable()
         {
             TryListenForDeath();
+            _painPerceptorRegistrationTracker.Register();
         }
 
         protected void OnDisable()
         {
             TryStopListeningForDeath();
+            _painPerceptorRegistrationTracker.Unregister();
         }
 
         private bool ListeningForDeath = false;
@@ -205,7 +221,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
                         concern += greaterConcernScale;
                         break;
                     case EnemySpeciesRank.Supreme:
-                        concern += supremeConcernScale;
+                        concern += supremeConcernScale * (((SpeciesType == otherSpeciesType && SpeciesType == EnemySpeciesType.Angel) && (SpeciesRank == EnemySpeciesRank.Greater || SpeciesRank == EnemySpeciesRank.Lesser)) ? 10.0f : 1.0f);
                         break;
                     case EnemySpeciesRank.Prime:
                         concern += primeConcernScale;
@@ -284,5 +300,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
         {
             MonoRegistrarIdx = EnemyComponents.MonoRegistrar.Register<EnemyPain>();
         }
+
+        private RegistrationTracker _painPerceptorRegistrationTracker;
     }
 }

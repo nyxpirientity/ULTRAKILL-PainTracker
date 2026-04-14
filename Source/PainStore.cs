@@ -21,7 +21,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
         public int PainMeterRequests { get; private set; } = 0;
         public GameObject PainMeterGo { get; private set; } = null;
         public PainMeter PainMeter { get; private set; } = null;
-
+        public int NumPainPerceptors { get; private set; } = 0;
 
         public void AddPain(float amount)
         {
@@ -31,6 +31,16 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
             }
             
             Pain = Mathf.Max(0.0f, Pain + amount);
+        }
+
+        public void RegisterPainPerceptor()
+        {
+            NumPainPerceptors += 1;
+        }
+
+        public void UnregisterPainPerceptor()
+        {
+            NumPainPerceptors -= 1;
         }
 
         public void RequestShowPainMeter()
@@ -78,12 +88,16 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
             if (CheckpointDetector == null)
             {
                 NewCheckpointDetector();
-                Pain = 0.0f;
+                
+                if (Options.ResetPainOnCheckpointRestart.Value)
+                {
+                    Pain = 0.0f;
+                }
             }
 
             if (PainMeterGo != null)
             {
-                if (PainMeterRequests > 0 && Pain >= 0.1f)
+                if (PainMeterRequests > 0 && (Pain >= 0.1f || Options.ShowPainMeterEvenIfNoPain.Value) && !Options.AlwaysHidePainMeter.Value)
                 {
                     PainMeterGo.SetActive(true);
                 }
@@ -92,10 +106,30 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
                     PainMeterGo.SetActive(false);
                 }
             }
+
+            if (Options.AutoRequestPainMeter.Value)
+            {
+                if (!_RequestedShowPainMeter)
+                {
+                    RequestShowPainMeter();
+                    _RequestedShowPainMeter = true;
+                }
+            }
+            else
+            {
+                if (_RequestedShowPainMeter)
+                {
+                    RetractRequestShowPainMeter();
+                    _RequestedShowPainMeter = false;
+                }
+            }
         }
 
         protected void FixedUpdate()
         {
+            float painRot = 25.0f - (Mathf.Pow(NumPainPerceptors, 0.5f)) * 17.5f;
+            painRot = Mathf.Max(0.0f, painRot);
+            AddPain(-painRot * Time.fixedDeltaTime);
         }
 
         protected void OnDestroy()
@@ -105,12 +139,20 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
 
         protected void OnEnable()
         {
-            
+            Cybergrind.PostCybergrindNextWave += OnCybergrindNextWave;
         }
-        
+
         protected void OnDisable()
         {
-            
+            Cybergrind.PostCybergrindNextWave -= OnCybergrindNextWave;
+        }
+
+        private void OnCybergrindNextWave(EventMethodCancelInfo cancelInfo, EndlessGrid endlessGrid)
+        {
+            if (Options.ResetPainOnCybergrindWaveChange.Value)
+            {
+                Pain = 0.0f;
+            }
         }
 
         internal static void Initialize()
@@ -119,5 +161,6 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
         }
 
         private GameObject CheckpointDetector = null;
+        private bool _RequestedShowPainMeter = false;
     }
 }
