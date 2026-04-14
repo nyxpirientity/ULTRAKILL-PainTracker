@@ -127,7 +127,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
 
         protected void FixedUpdate()
         {
-            float painRot = 2.5f + (Mathf.Pow(NumPainPerceptors, 1.05f)) * 0.15f;
+            float painRot = 1.0f + (Mathf.Pow(NumPainPerceptors, 1.05f)) * 0.15f;
             painRot = Mathf.Max(0.0f, painRot);
             AddPain(-painRot * Time.fixedDeltaTime);
         }

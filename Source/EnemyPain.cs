@@ -240,7 +240,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
                 }
             }
 
-            var mentalPain = (concern + compassion) * MentalSensitivity;
+            var mentalPain = (concern + compassion) * MentalSensitivity * 4.0f;
             MentalSensitivity = Mathf.Max(0.2f, MentalSensitivity - mentalPain);
             ActiveMentalPain += mentalPain;
             ActiveHardMentalPain += mentalPain * 0.2f;
@@ -284,7 +284,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
                 break;
                 case EnemyType.SisyphusPrime:
                     ActiveMentalPain = 0.0f;
-                    painScalar = 0.35f;
+                    painScalar = 0.25f;
                     break;
                 default:
                     break;
@@ -304,7 +304,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
 
             PhysicalSensitivity = Mathf.Max(0.2f, PhysicalSensitivity - (pain * 0.5f));
 
-            ActivePhysicalPain += pain;
+            ActivePhysicalPain += pain * 4.0f;
         }
 
         internal static void Initialize()
