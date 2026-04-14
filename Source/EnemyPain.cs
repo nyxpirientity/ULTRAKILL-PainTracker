@@ -136,6 +136,11 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
                 return;
             }
 
+            if (otherEnemy.Eid.puppet)
+            {
+                return;
+            }
+
             var otherSpeciesType = otherEnemy.Eid.GetSpeciesType();
             var otherSpeciesRank = otherEnemy.Eid.GetSpeciesRank();
 
