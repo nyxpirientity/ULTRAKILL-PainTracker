@@ -248,12 +248,12 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
 
         protected void FixedUpdate()
         {
-            ActivePhysicalPain = Mathf.MoveTowards(ActivePhysicalPain, -0.05f, Time.fixedDeltaTime * 0.15f);
-            PhysicalSensitivity = Mathf.MoveTowards(PhysicalSensitivity, 1.0f, Time.fixedDeltaTime * 2.0f);
+            ActivePhysicalPain = Mathf.MoveTowards(ActivePhysicalPain, -0.05f, Time.fixedDeltaTime * 0.5f);
+            PhysicalSensitivity = Mathf.MoveTowards(PhysicalSensitivity, 1.0f, Time.fixedDeltaTime * 1.25f);
 
-            ActiveMentalPain = Mathf.MoveTowards(ActiveMentalPain, ActiveHardMentalPain, Time.fixedDeltaTime * 0.25f);
-            ActiveHardMentalPain = Mathf.MoveTowards(ActiveHardMentalPain, -0.05f, Time.fixedDeltaTime * 0.1f);
-            MentalSensitivity = Mathf.MoveTowards(MentalSensitivity, 1.0f, Time.fixedDeltaTime * 2.0f);
+            ActiveMentalPain = Mathf.MoveTowards(ActiveMentalPain, ActiveHardMentalPain, Time.fixedDeltaTime * 0.4f);
+            ActiveHardMentalPain = Mathf.MoveTowards(ActiveHardMentalPain, -0.05f, Time.fixedDeltaTime * 0.25f);
+            MentalSensitivity = Mathf.MoveTowards(MentalSensitivity, 1.0f, Time.fixedDeltaTime * 1.25f);
 
             if (Enemy.Eid.Dead)
             {
