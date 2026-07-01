@@ -12,10 +12,10 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
     internal static class Assets
     {
         public static GameObject HeatResistancePrefabWithoutHeatResistance { get; private set; } = null;
-        
+
         public static void Initialize()
         {
-            ScenesEvents.OnSceneWasLoaded += OnSceneWasLoaded;
+            SceneEvents.OnSceneLoad += OnSceneWasLoaded;
         }
 
         private static void OnSceneWasLoaded(Scene scene, string levelName, string unitySceneName)
@@ -23,7 +23,7 @@ namespace Nyxpiri.ULTRAKILL.PainTracker
             if (HeatResistancePrefabWithoutHeatResistance == null)
             {
                 var possibleHeatResistance = UnityEngine.Object.FindAnyObjectByType<HeatResistance>(FindObjectsInactive.Include);
-                
+
                 if (possibleHeatResistance != null)
                 {
                     HeatResistancePrefabWithoutHeatResistance = UnityEngine.Object.Instantiate(possibleHeatResistance.gameObject.transform.parent.gameObject, null, false);
